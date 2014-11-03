@@ -50,6 +50,8 @@ package com.shrimp.pakour.core
 			
 			isReady = true;
 			
+			state = EngineStateEnum.READY;
+			
 			if(hasEventListener("complete"))
 			{
 				dispatchEvent(new Event(Event.COMPLETE));
@@ -61,24 +63,26 @@ package com.shrimp.pakour.core
 		{
 			timer.removeEventListener(Event.ENTER_FRAME,update);
 			timer.addEventListener(Event.ENTER_FRAME,update);
+			state = EngineStateEnum.RUNNING;
 		}
 		
 		/**	引擎停止*/
 		public function stop():void
 		{
 			timer.removeEventListener(Event.ENTER_FRAME,update);
+			state = EngineStateEnum.OVER;
 		}
 		
 		/**	引擎恢复*/
 		public function resume():void
 		{
-			state = EngineStateEnum.RESUME;
+			state = preState;
 		}
 		
 		/**	引擎暂停*/
 		public function pause():void
 		{
-			state = preState;
+			state = EngineStateEnum.RESUME;
 		}
 		
 		
@@ -86,7 +90,7 @@ package com.shrimp.pakour.core
 		 *	更新函数 
 		 * 
 		 */		
-		protected function update():void
+		protected function update(e:Event):void
 		{
 			_nowTime = new Date().time;
 			_timeDelta = (_nowTime - _gameTime) * 0.001;
@@ -94,7 +98,7 @@ package com.shrimp.pakour.core
 			
 			//根据state,_timeDelta更新
 			//根据state,得到对应的渲染器列表.进行渲染
-			var arr:Array = _renderPool.getRenders(state);
+			var arr:Array = renderPool.getRenders(state);
 			
 			for each (var render:IRender in arr) 
 			{
@@ -119,6 +123,11 @@ package com.shrimp.pakour.core
 		{
 			preState = _state;
 			_state = value;
+		}
+		
+		public function get renderPool():RenderPool
+		{
+			return _renderPool;
 		}
 	}
 }

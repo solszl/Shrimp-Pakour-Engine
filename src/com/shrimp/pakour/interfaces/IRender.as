@@ -7,7 +7,7 @@ package com.shrimp.pakour.interfaces
 		 * @param advanced	过去的时间
 		 * 
 		 */		
-		function update(advanced:Number):void;
+		function update(t:Number):void;
 		
 		/**
 		 *	渲染器名字 
