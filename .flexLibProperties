@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="true" version="3">
+  <includeClasses>
+    <classEntry path="com.shrimp.pakour.core.Engine"/>
+    <classEntry path="com.shrimp.pakour.constants.EngineStateEnum"/>
+    <classEntry path="com.shrimp.pakour.interfaces.IRender"/>
+    <classEntry path="com.shrimp.pakour.utils.RenderPool"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
